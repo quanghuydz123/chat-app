@@ -27,6 +27,15 @@ export const Colors = {
   },
 };
 
+export const FontSize = {
+  xs: 10,
+  small: 12,
+  medium: 14,
+  large: 16,
+  xlarge: 20,
+  xxlarge: 24,
+};
+
 export const Fonts = Platform.select({
   ios: {
     /** iOS `UIFontDescriptorSystemDesignDefault` */
