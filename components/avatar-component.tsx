@@ -4,22 +4,29 @@ import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import TextComponent from "./text-component";
 interface IProps {
     onPress?: () => void;
+    name?: string;
+    imageUrl?: string;
+    isOnline?: boolean;
+    showInfo?: boolean;
+    size?: number;
 }
-const AvatarComponent = ({ onPress }: IProps) => {
+const AvatarComponent = ({ onPress, name, imageUrl, isOnline, showInfo, size = 70 }: IProps) => {
     const colorScheme = useColorScheme();
     return (
         <TouchableOpacity onPress={onPress} style={styles.container}>
             <View style={styles.imageContainer}>
-                <Image
-                    source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS221fOmoEQSIbhaczO-ag4OUNcia9vwvP9Mg&s' }}
-                    style={styles.image}
-                />
-                <View style={styles.statusDot} />
-                <View style={[styles.infoContainer, { backgroundColor: colorScheme === 'dark' ? Colors.dark.background : Colors.light.background }]}>
-                    <TextComponent text="Tôi có thể giúp gì cho bạn" styles={{ fontSize: FontSize.xs }} />
+                <View>
+                    <Image
+                        source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS221fOmoEQSIbhaczO-ag4OUNcia9vwvP9Mg&s' }}
+                        style={[styles.image, { width: size, height: size, borderRadius: size / 2 }]}
+                    />
+                    <View style={[styles.statusDot, { width: size / 5, height: size / 5, borderRadius: size / 10 }]} />
                 </View>
+                {false && <View style={[styles.infoContainer, { backgroundColor: colorScheme === 'dark' ? Colors.dark.background : Colors.light.background }]}>
+                    <TextComponent text="Tôi có thể giúp gì cho bạn" size={FontSize.small} />
+                </View>}
             </View>
-            <TextComponent text="Nguyễn Văn A" />
+            {name && <TextComponent text={name} size={FontSize.xs} />}
         </TouchableOpacity>
     );
 };
@@ -28,8 +35,6 @@ const styles = StyleSheet.create({
         paddingRight: 14,
     },
     image: {
-        width: 65,
-        height: 65,
         borderRadius: 50,
         overflow: 'hidden',
         resizeMode: 'cover',
@@ -46,7 +51,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'green',
         position: 'absolute',
         bottom: 2,
-        right: 6,
+        right: 4,
         borderWidth: 2,
         borderColor: 'white',
     },

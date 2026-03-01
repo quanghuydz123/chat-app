@@ -34,6 +34,7 @@ export const FontSize = {
   large: 16,
   xlarge: 20,
   xxlarge: 24,
+  xxxlarge: 28,
 };
 
 export const Fonts = Platform.select({

@@ -7,7 +7,7 @@ import RowComponent from "./row-component";
 const SearchComponent = () => {
     const colorScheme = useColorScheme();
     return (
-        <RowComponent styles={styles.container}>
+        <RowComponent styles={styles.container} alignItems='center'>
             <TextInput
                 placeholder="Tìm kiếm..."
                 placeholderTextColor="#999"
@@ -20,12 +20,12 @@ const SearchComponent = () => {
 
 const styles = StyleSheet.create({
     container: {
-        maxHeight: 44,
+        height: 44,
         borderColor: 'gray',
         borderWidth: 1,
         borderRadius: 100,
         paddingHorizontal: 12,
-        flex: 1
+        flex: 1,
     },
     input: {
         flex: 1,

@@ -5,11 +5,23 @@ import { StyleSheet, Text, TextStyle } from "react-native";
 interface IProps {
     text: string;
     styles?: TextStyle;
+    fontWeight?: 'normal' | 'bold' | '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900';
+    color?: string;
+    size?: number;
 }
-const TextComponent = ({ text, styles }: IProps) => {
+const TextComponent = ({ text, styles, fontWeight, color, size }: IProps) => {
     const colorScheme = useColorScheme();
     return (
-        <Text style={[styleSheet.text, styles, { color: colorScheme === 'dark' ? Colors.dark.text : Colors.light.text }]}>{text}</Text>
+        <Text style={[
+            styleSheet.text,
+            styles,
+            { color: colorScheme === 'dark' ? Colors.dark.text : Colors.light.text },
+            { fontWeight: fontWeight },
+            { color: color },
+            { fontSize: size }
+        ]}>
+            {text}
+        </Text>
     );
 };
 const styleSheet = StyleSheet.create({

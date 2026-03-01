@@ -1,28 +1,78 @@
 import AvatarComponent from '@/components/avatar-component';
 import ContainerComponent from '@/components/container-component';
+import ConversationItemComponent from '@/components/conversation-item-component';
 import RowComponent from '@/components/row-component';
 import SearchComponent from '@/components/search-component';
 import TagComponent from '@/components/tag-component';
-import { FlatList, StyleSheet, View } from 'react-native';
+import TextComponent from '@/components/text-component';
+import { FontSize } from '@/constants/theme';
+import { useState } from 'react';
+import { FlatList, Image, ScrollView, StyleSheet, View } from 'react-native';
 
 
 export default function HomeScreen() {
+  const [isTop, setIsTop] = useState(true);
   return (
     <ContainerComponent>
-      <SearchComponent />
-      <View>
-        <FlatList
-          data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
-          renderItem={() => <AvatarComponent onPress={() => { }} />}
-          keyExtractor={(item, index) => index.toString()}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          style={styles.avatarContainer}
+      <RowComponent>
+        <Image
+          source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVWc4dEr7ZP-7-ykETT3TXu-3du-HL3wa1wQ&s' }}
+          style={styles.image}
         />
-      </View>
-      <RowComponent styles={styles.tagContainer}>
-        <TagComponent />
+        <TextComponent text="messager" size={FontSize.xxlarge} fontWeight='bold' color='#004dba' />
       </RowComponent>
+      {!isTop && <View style={styles.shadow} />}
+      <ScrollView
+        style={{ flex: 1 }}
+        bounces={false}
+        overScrollMode="never"
+        alwaysBounceVertical={false}
+        scrollEventThrottle={16} // cần để onScroll chạy mượt
+        showsVerticalScrollIndicator={false}
+        onScroll={(event) => {
+          const y = event.nativeEvent.contentOffset.y;
+          if (y <= 0 && !isTop) {
+            setIsTop(true);
+          } else if (y > 0 && isTop) {
+            setIsTop(false);
+          }
+        }}
+      >
+        <View>
+          <SearchComponent />
+        </View>
+        <View>
+          <FlatList
+            data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+            renderItem={() => <AvatarComponent onPress={() => { }} name='Nguyễn Văn A' />}
+            keyExtractor={(item, index) => index.toString()}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            style={styles.avatarContainer}
+            bounces={false}
+            overScrollMode="never"
+            alwaysBounceHorizontal={false}
+          />
+        </View>
+        <RowComponent styles={styles.tagContainer} justifyContent='flex-start'>
+          <TagComponent text="Tất cả" isSelected />
+          <TagComponent text="Đang hoạt động" />
+          <TagComponent text="Đã hoàn thành" />
+        </RowComponent>
+        <View style={{ marginTop: 16 }}>
+          <ConversationItemComponent onPress={() => { }} />
+          <ConversationItemComponent onPress={() => { }} />
+          <ConversationItemComponent onPress={() => { }} />
+          <ConversationItemComponent onPress={() => { }} />
+          <ConversationItemComponent onPress={() => { }} />
+          <ConversationItemComponent onPress={() => { }} />
+          <ConversationItemComponent onPress={() => { }} />
+          <ConversationItemComponent onPress={() => { }} />
+          <ConversationItemComponent onPress={() => { }} />
+          <ConversationItemComponent onPress={() => { }} />
+        </View>
+      </ScrollView>
+
     </ContainerComponent>
   );
 }
@@ -50,5 +100,26 @@ const styles = StyleSheet.create({
   },
   tagContainer: {
     marginTop: 8,
+  },
+  image: {
+    width: 38,
+    height: 38,
+    resizeMode: 'cover',
+    marginBottom: 8,
+    marginRight: 4
+  },
+  shadow: {
+    flex: 1,
+    maxHeight: 1,
+    marginHorizontal: -16,
+    backgroundColor: 'red',
+    shadowColor: 'black',
+    shadowOffset: {
+      width: 0,
+      height: 10,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 20,
+    elevation: 2,
   }
 });
