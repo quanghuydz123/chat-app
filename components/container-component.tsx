@@ -1,15 +1,23 @@
 import { Colors } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import { ReactNode } from "react";
-import { StyleSheet } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-
-const ContainerComponent = ({ children }: { children: ReactNode }) => {
+import { StyleSheet, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import HeaderComponent from "./header-component";
+interface Props {
+    children: ReactNode;
+    isShowHeader?: boolean;
+    prefix?: ReactNode;
+    suffix?: ReactNode;
+}
+const ContainerComponent = ({ children, isShowHeader, prefix, suffix }: Props) => {
     const colorScheme = useColorScheme();
+    const insets = useSafeAreaInsets();
     return (
-        <SafeAreaView style={[styles.container, { backgroundColor: colorScheme === 'dark' ? Colors.dark.background : Colors.light.background }]}>
+        <View style={[styles.container, { backgroundColor: colorScheme === 'dark' ? Colors.dark.background : Colors.light.background, paddingTop: insets.top }]}>
+            {isShowHeader && <HeaderComponent prefix={prefix} suffix={suffix} />}
             {children}
-        </SafeAreaView>
+        </View>
     );
 };
 

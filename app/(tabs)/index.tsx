@@ -6,6 +6,7 @@ import SearchComponent from '@/components/search-component';
 import TagComponent from '@/components/tag-component';
 import TextComponent from '@/components/text-component';
 import { FontSize } from '@/constants/theme';
+import { router } from 'expo-router';
 import { useState } from 'react';
 import { FlatList, Image, ScrollView, StyleSheet, View } from 'react-native';
 
@@ -24,6 +25,7 @@ export default function HomeScreen() {
       {!isTop && <View style={styles.shadow} />}
       <ScrollView
         style={{ flex: 1 }}
+        contentContainerStyle={{ }}
         bounces={false}
         overScrollMode="never"
         alwaysBounceVertical={false}
@@ -60,7 +62,7 @@ export default function HomeScreen() {
           <TagComponent text="Đã hoàn thành" />
         </RowComponent>
         <View style={{ marginTop: 16 }}>
-          <ConversationItemComponent onPress={() => { }} />
+          <ConversationItemComponent onPress={() => { router.push('/chat-screen') }} />
           <ConversationItemComponent onPress={() => { }} />
           <ConversationItemComponent onPress={() => { }} />
           <ConversationItemComponent onPress={() => { }} />
@@ -109,17 +111,18 @@ const styles = StyleSheet.create({
     marginRight: 4
   },
   shadow: {
-    flex: 1,
-    maxHeight: 1,
-    marginHorizontal: -16,
-    backgroundColor: 'red',
-    shadowColor: 'black',
-    shadowOffset: {
-      width: 0,
-      height: 10,
-    },
-    shadowOpacity: 0.5,
-    shadowRadius: 20,
-    elevation: 2,
-  }
+  height: 3,
+  marginHorizontal: -16,
+  backgroundColor: '#e1e6ea',
+
+  shadowColor: '#000',
+  shadowOffset: {
+    width: 0,
+    height: 4,
+  },
+  shadowOpacity: 0.2,
+  shadowRadius: 4,
+
+  elevation: 4,
+}
 });

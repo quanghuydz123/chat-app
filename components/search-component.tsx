@@ -13,14 +13,14 @@ const SearchComponent = () => {
                 placeholderTextColor="#999"
                 style={[styles.input, { color: colorScheme === 'dark' ? Colors.dark.text : Colors.light.text }]}
             />
-            <FontAwesome name="search" size={24} color={colorScheme === 'dark' ? Colors.dark.text : Colors.light.text} />
+            <FontAwesome name="search" size={22} color={colorScheme === 'dark' ? Colors.dark.text : Colors.light.text} />
         </RowComponent>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        height: 44,
+        height: 38,
         borderColor: 'gray',
         borderWidth: 1,
         borderRadius: 100,

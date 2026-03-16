@@ -11,14 +11,17 @@ const tintColorDark = '#fff';
 export const Colors = {
   light: {
     text: '#11181C',
+    textGray: '#687076',
     background: '#fff',
     tint: tintColorLight,
     icon: '#687076',
     tabIconDefault: '#687076',
     tabIconSelected: tintColorLight,
+    
   },
   dark: {
     text: '#ECEDEE',
+    textGray: '#9BA1A6',
     background: '#151718',
     tint: tintColorDark,
     icon: '#9BA1A6',
@@ -30,6 +33,7 @@ export const Colors = {
 export const FontSize = {
   xs: 10,
   small: 12,
+  f13: 13,
   medium: 14,
   large: 16,
   xlarge: 20,

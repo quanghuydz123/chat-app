@@ -9,8 +9,9 @@ interface IProps {
     isOnline?: boolean;
     showInfo?: boolean;
     size?: number;
+    disableDot?: boolean;
 }
-const AvatarComponent = ({ onPress, name, imageUrl, isOnline, showInfo, size = 70 }: IProps) => {
+const AvatarComponent = ({ onPress, name, imageUrl, isOnline, showInfo, size = 70, disableDot = false }: IProps) => {
     const colorScheme = useColorScheme();
     return (
         <TouchableOpacity onPress={onPress} style={styles.container}>
@@ -20,10 +21,10 @@ const AvatarComponent = ({ onPress, name, imageUrl, isOnline, showInfo, size = 7
                         source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS221fOmoEQSIbhaczO-ag4OUNcia9vwvP9Mg&s' }}
                         style={[styles.image, { width: size, height: size, borderRadius: size / 2 }]}
                     />
-                    <View style={[styles.statusDot, { width: size / 5, height: size / 5, borderRadius: size / 10 }]} />
+                    {!disableDot && <View style={[styles.statusDot, { width: size / 5, height: size / 5, borderRadius: size / 8 }]} />}
                 </View>
                 {false && <View style={[styles.infoContainer, { backgroundColor: colorScheme === 'dark' ? Colors.dark.background : Colors.light.background }]}>
-                    <TextComponent text="Tôi có thể giúp gì cho bạn" size={FontSize.small} />
+                    <TextComponent text="Tôi có thể giúp gì" size={FontSize.xs} />
                 </View>}
             </View>
             {name && <TextComponent text={name} size={FontSize.xs} />}
@@ -50,7 +51,7 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         backgroundColor: 'green',
         position: 'absolute',
-        bottom: 2,
+        bottom: 0,
         right: 4,
         borderWidth: 2,
         borderColor: 'white',
